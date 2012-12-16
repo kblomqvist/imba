@@ -100,15 +100,39 @@
 
 <div id="main-wrapper">
 <div class="container" role="main">
-    <div class="row"><div class="span12">
-    {% block content %}{% endblock %}
-    <footer>
-        {% block footer %}{% endblock %}
-        {{ wp.wp_footer() }}
-    </footer>
-    </div></div>
+    <div class="row">
+        <div class="span12">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
 </div>
 </div>
+
+<footer>
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            {% block footer %}
+            {% endblock %}
+            {{ wp.wp_footer() }}
+        </div>
+    </div>
+</footer>
+
+<script src="{{ basepath }}/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".img-swap").hover(
+            function(){this.src = this.src.replace("_nm","_hv");},
+            function(){this.src = this.src.replace("_hv","_nm");
+        });
+
+        {% block onload %}
+        {% endblock %}
+
+    });
+</script>
 
 </body>
 </html>
