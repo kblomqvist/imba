@@ -1,0 +1,83 @@
+/*
+Theme Name: TwigTheme
+Author: Kim Blomqvist, github.com/kblomqvist/TwigTheme
+Description: Wordpress with Twig and Bootstrap
+Version: 0.1
+*/
+
+html {}
+body {}
+
+body > header {}
+body > footer {}
+
+a, a:hover {}
+
+h1.entry-title > a {}
+h1.entry-title a:hover { text-decoration: none; letter-spacing: 1px }
+
+#main-wrapper {}
+#main-content > * { margin-top: 20px; margin-left: 20px; }
+
+div.posts, div.post {}
+
+div.page {}
+.post .published {
+    display: block;
+    border: 0;
+    margin: 0 0 10px;
+    font-size: 11px;
+}
+article.post { margin-bottom: 40px; }
+
+.post img, .page img { margin: 20px; }
+.post img, .page img {
+border: 1px solid #fff;
+-webkit-box-shadow: 0 17px 35px -12px #444;
+   -moz-box-shadow: 0 17px 35px -12px #444;
+        box-shadow: 0 17px 35px -12px #444;
+}
+.post img.no-shadow, .page img.no-shadow {
+    border: 0;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+        box-shadow: none;
+}
+img.alignright { float: right; }
+
+.widget-title {
+    margin-top: 0;
+    background: none;
+}
+
+.carousel .item img { margin: 0; }
+
+/* ---------------------------------------------------------------
+ * MENUS
+ * ------------------------------------------------------------ */
+#main-menu { text-align: right; margin-right: 20px; }
+#main-menu > li {}
+#main-menu a { color: #fff; letter-spacing: 3px; display: block; }
+#main-menu a:hover { text-decoration: none; letter-spacing: 1px }
+
+/* ---------------------------------------------------------------
+ * HELPERS
+ * ------------------------------------------------------------ */
+ul.reset {
+    display: block;
+    list-style-type: none;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+
+/* ---------------------------------------------------------------
+ * OVERRIDE BOOTSTRAP
+ * ------------------------------------------------------------ */
+.container { margin: 0; }
+
+@media (min-width: 1200px) {}
+@media (max-width: 979px) and (min-width: 768px) {}
+@media (max-width: 767px) {}

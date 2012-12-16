@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ wp.wp_title('') }} &#187; 
+{% endblock %}
+
+{% block content %}
+    <h1>{{ post.post_title }}</h1>
+    {{ post.post_content|replace({'<p></p>': ''})|raw }}
+{% endblock %}
