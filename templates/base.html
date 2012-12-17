@@ -118,17 +118,18 @@
             {{ wp.wp_footer() }}
         </div>
     </div>
+</div>
 </footer>
 
 <script src="{{ basepath }}/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $(".img-swap").hover(
-            function(){this.src = this.src.replace("_nm","_hv");},
-            function(){this.src = this.src.replace("_hv","_nm");
-        });
+            function() { this.src = this.src.replace("_nm","_hv"); },
+            function() { this.src = this.src.replace("_hv","_nm"); }
+        );
 
-        {% block onload %}
+        {% block jquery %}
         {% endblock %}
 
     });
