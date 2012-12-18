@@ -1,7 +1,7 @@
 TwigTheme
 ===================
 
-WordPress with Twig, PHP Markdown and Bootstrap.
+WordPress theme with **Twi**g, PHP **Ma**rkdown and **Bo**otstrap.
 
 ## Copyright and license
 
