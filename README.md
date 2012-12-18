@@ -1,4 +1,4 @@
-TwigTheme
+TwiMaBo
 ===================
 
 WordPress theme with **Twi**g, PHP **Ma**rkdown and **Bo**otstrap.
