@@ -1,14 +1,14 @@
 TwigTheme
 ===================
 
-WordPress with Twig and Bootstrap
+WordPress with Twig, PHP Markdown and Bootstrap.
 
 ## Copyright and license
 
-    Copyright (c) 2012 Kim Blomqvist.
-    All rights reserved.
+Copyright (c) 2012 Kim Blomqvist.  
+All rights reserved.
 
-    GPL license.
+GPL license.
 
 ### Twig
 
