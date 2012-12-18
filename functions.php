@@ -23,27 +23,19 @@ class WordpressTwigProxy {
         }
 }
 
-class TwigJqueryContainer {
-	public $js = '';
-	public function __toString() {
-		return $this->js;
-	}
-}
+$twig->addGlobal('wp', new WordpressTwigProxy());
 
-$twigFilterMarkdown = new Twig_SimpleFilter('markdown', function($string) {
+$twig->addFilter(new Twig_SimpleFilter('markdown', function($string) {
 	require_once 'php-markdown/markdown.php';
 	$string = do_shortcode($string);
 	return Markdown($string);
-});
+}));
 
-$twig->addGlobal('wp', new WordpressTwigProxy());
-
-$twigJqueryContainer = new TwigJqueryContainer();
-$twig->addGlobal('jquery', &$twigJqueryContainer);
+$jquery = '';
+$twig->addGlobal('jquery', $jquery);
 
 $twig->addGlobal('basepath', get_bloginfo('stylesheet_directory'));
 
-$twig->addFilter($twigFilterMarkdown);
 
 
 // ---------------------------------------------------------------------
@@ -70,20 +62,28 @@ add_filter('pre_site_transient_update_core', function () { return null; });
 // ---------------------------------------------------------------------
 // Shortcodes
 // ---------------------------------------------------------------------
-function edit($attrs, $content) {
-	global $twigJqueryContainer;
+function replace($attrs, $content) {
+	global $jquery;
+	extract(shortcode_atts(array('id' => ''), $attrs));
+	$content = str_replace("\r\n", '', $content);
+	$jquery .= "\$('#$id').html('$content');\n";
+}
+function append($attrs, $content) {
+	global $jquery;
+	extract(shortcode_atts(array('id' => ''), $attrs));
+	$content = str_replace("\r\n", '', $content);
+	$jquery .= "\$('#$id').append('$content');\n";
+}
+function prepend($attrs, $content) {
+	global $jquery;
 	extract(shortcode_atts(array('id' => '', 'place' => 'inner'), $attrs));
 	$content = str_replace("\r\n", '', $content);
-	if ($place == 'append') {
-		$twigJqueryContainer->js .= "\$('#$id').append('$content');\n";
-	} elseif ($place == 'prepend') {
-		$twigJqueryContainer->js .= "\$('#$id').prepend('$content');\n";
-	} else {
-		$twigJqueryContainer->js .= "\$('#$id').html('$content');\n";
-	}
+	$jquery .= "\$('#$id').prepend('$content');\n";
 }
 
-add_shortcode('edit', 'edit');
+add_shortcode('replace', 'replace');
+add_shortcode('append', 'append');
+add_shortcode('prepend', 'prepend');
 
 
 
