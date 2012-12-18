@@ -1,6 +1,6 @@
 <?php
 /*
- * TwiMaBo
+ * Twimabo
  * Copyright (c) Kim Blomqvist
  * All rights reserved.
  *
@@ -76,7 +76,7 @@ function append($attrs, $content) {
 }
 function prepend($attrs, $content) {
 	global $jquery;
-	extract(shortcode_atts(array('id' => '', 'place' => 'inner'), $attrs));
+	extract(shortcode_atts(array('id' => ''), $attrs));
 	$content = str_replace("\r\n", '', $content);
 	$jquery .= "\$('#$id').prepend('$content');\n";
 }
