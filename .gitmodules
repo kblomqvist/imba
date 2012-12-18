@@ -1,3 +1,6 @@
 [submodule "Twig"]
 	path = Twig
 	url = git://github.com/fabpot/Twig.git
+[submodule "php-markdown"]
+	path = php-markdown
+	url = git://github.com/michelf/php-markdown.git

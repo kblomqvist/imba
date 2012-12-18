@@ -9,6 +9,12 @@
 // ---------------------------------------------------------------------
 // Twig
 // ---------------------------------------------------------------------
+require_once 'Twig/lib/Twig/Autoloader.php';
+Twig_Autoloader::register();
+
+$twigLoader = new Twig_Loader_Filesystem(__DIR__ . '/templates');
+$twig = new Twig_Environment($twigLoader, array());
+
 class WordpressTwigProxy {
         public function __call($name, $arguments) {
                 if (function_exists($name))
@@ -16,14 +22,27 @@ class WordpressTwigProxy {
         }
 }
 
-require_once 'Twig/lib/Twig/Autoloader.php';
-Twig_Autoloader::register();
+class TwigJqueryContainer {
+	public $js = '';
+	public function __toString() {
+		return $this->js;
+	}
+}
 
-$twig_loader = new Twig_Loader_Filesystem(__DIR__ . '/templates');
-$twig = new Twig_Environment($twig_loader, array());
+$twigFilterMarkdown = new Twig_SimpleFilter('markdown', function($string) {
+	require_once 'php-markdown/markdown.php';
+	$string = do_shortcode($string);
+	return Markdown($string);
+});
+
 $twig->addGlobal('wp', new WordpressTwigProxy());
+
+$twigJqueryContainer = new TwigJqueryContainer();
+$twig->addGlobal('jquery', &$twigJqueryContainer);
+
 $twig->addGlobal('basepath', get_bloginfo('stylesheet_directory'));
 
+$twig->addFilter($twigFilterMarkdown);
 
 
 // ---------------------------------------------------------------------
@@ -50,21 +69,20 @@ add_filter('pre_site_transient_update_core', function () { return null; });
 // ---------------------------------------------------------------------
 // Shortcodes
 // ---------------------------------------------------------------------
-function placeholder($attrs, $content) {
+function edit($attrs, $content) {
+	global $twigJqueryContainer;
 	extract(shortcode_atts(array('id' => '', 'place' => 'inner'), $attrs));
 	$content = str_replace("\r\n", '', $content);
-	$script = "<script>jQuery(function(){";
 	if ($place == 'append') {
-		$script .= "\$('#$id').append('$content');";
+		$twigJqueryContainer->js .= "\$('#$id').append('$content');\n";
 	} elseif ($place == 'prepend') {
-		$script .= "\$('#$id').prepend('$content');";
+		$twigJqueryContainer->js .= "\$('#$id').prepend('$content');\n";
 	} else {
-		$script .= "\$('#$id').html('$content');";
+		$twigJqueryContainer->js .= "\$('#$id').html('$content');\n";
 	}
-	return $script . "});</script>";
 }
 
-add_shortcode('placeholder', 'placeholder');
+add_shortcode('edit', 'edit');
 
 
 
