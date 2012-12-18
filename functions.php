@@ -1,5 +1,6 @@
 <?php
 /*
+ * TwiMaBo
  * Copyright (c) Kim Blomqvist
  * All rights reserved.
  *
