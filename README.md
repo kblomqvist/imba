@@ -1,4 +1,4 @@
-TwiMaBo
+Twimabo
 ===================
 
 WordPress theme with **Twi**g, PHP **Ma**rkdown and **Bo**otstrap.
