@@ -1,6 +1,6 @@
 <?php
 /*
- * Twimabo
+ * Imba theme for WordPress
  * Copyright (c) Kim Blomqvist
  * All rights reserved.
  *
