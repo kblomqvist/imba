@@ -1,7 +1,7 @@
-Twimabo
+Imba
 ===================
 
-WordPress theme with **Twi**g, PHP **Ma**rkdown and **Bo**otstrap.
+Imba is a lightweight WordPress theme that integrates Twig, PHP Markdown and Bootstrap.
 
 ## Copyright and license
 
