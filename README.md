@@ -1,9 +1,4 @@
-Imba
-===================
-
-Imba is a lightweight WordPress theme that integrates Twig, PHP Markdown and Bootstrap.
-
-## Copyright and license
+# Imba
 
 Copyright (c) 2012 Kim Blomqvist.  
 All rights reserved.
