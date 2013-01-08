@@ -1,0 +1,88 @@
+#
+# htaccess file of Imba WordPress theme
+# Copyright (c) Kim Blomqvist
+# All rights reserved.
+#
+# Better chmod 444 .htaccess than let Wordpress mess this up.
+#
+
+# Disable directory browsing
+Options All -Indexes
+
+# Disable server signature
+ServerSignature Off
+
+# Server-side password protection to /wp-admin/ and wp-login.php
+# - Modify the AuthUserFile to point to .htpasswd
+#   - pwd # to check full path
+#   - htpasswd -c .htpasswd username # creates the .htpasswd file
+#<FilesMatch "(wp-admin/.*|wp-login\.php)$">
+#       AuthType basic
+#       AuthName "Restricted"
+#       AuthUserFile /path/to/.htpasswds/wordpress
+#       Require valid-user
+#</FilesMatch>
+
+# Whitelisting some WP scripts and files from authentication
+# [1] (http://www.nkuttler.de/post/htaccess-protect-wordpress-admin/)
+# [2] (http://www.simonwheatley.co.uk/2009/02/21/wordpress-basic-authentication-and-file-uploads/)
+<FilesMatch "(admin-ajax\.php|css/\.*|async-upload\.php|wp-cron\.php)$">
+        Order allow,deny
+        Allow from all
+        Satisfy any
+</FilesMatch>
+
+
+# ----------------------------------------------------------------------
+# Start rewrite engine
+# ----------------------------------------------------------------------
+
+RewriteEngine On
+
+# When under maintenance uncomment the following lines and
+# set up developers' ip addresses to skip this rule
+#RewriteCond %{REMOTE_HOST} !^192\.162\.0\.0|192\.162\.0\.1
+#RewriteCond %{REQUEST_URI} !^/503\.php [NC]
+#RewriteRule .* /503.php [L]
+
+
+# ----------------------------------------------------------------------
+# A little more security
+# ----------------------------------------------------------------------
+
+# Protect dotfiles and wp-config.php
+RewriteRule "(^|/)\." - [F]
+RewriteRule wp-config\.php$ - [F]
+RewriteRule wp-admin/install\.php$ - [F]
+
+# Ban typical vulnerability scanners and others
+# Happily copied and modifed from the htaccess file contributed by phpMyAdmin
+# (http://phpmyadmin.git.sourceforge.net/git/gitweb.cgi?p=phpmyadmin/phpmyadmin;a=blob_plain;f=contrib/htaccess;hb=HEAD)
+RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
+RewriteCond %{HTTP_USER_AGENT} ^(java).* [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} ^.*(libwww-perl|curl|wget|python|nikto|wkito|pikto|scan|acunetix).* [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} ^.*(winhttp|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner).* [NC]
+RewriteRule $^|.* - [F]
+
+# Ban search engines and crawlers to your administrative panel (wp-admin)
+# Happily copied from the htaccess file contributed by phpMyAdmin
+# (http://phpmyadmin.git.sourceforge.net/git/gitweb.cgi?p=phpmyadmin/phpmyadmin;a=blob_plain;f=contrib/htaccess;hb=HEAD)
+RewriteCond %{HTTP_USER_AGENT} ^.*(AdsBot-Google|ia_archiver|Scooter|Ask.Jeeves|Baiduspider|Exabot|FAST.Enterprise.Crawler|FAST-WebCrawler|www\.neomo\.de|Gigabot|Mediapartners-Google|Google.Desktop|Feedfetcher-Google|Googlebot|heise-IT-Markt-Crawler|heritrix|ibm.com\cs/crawler|ICCrawler|ichiro|MJ12bot|MetagerBot|msnbot-NewsBlogs|msnbot|msnbot-media|NG-Search|lucene.apache.org|NutchCVS|OmniExplorer_Bot|online.link.validator|psbot0|Seekbot|Sensis.Web.Crawler|SEO.search.Crawler|Seoma.\[SEO.Crawler\]|SEOsearch|Snappy|www.urltrends.com|www.tkl.iis.u-tokyo.ac.jp/~crawler|SynooBot|crawleradmin.t-info@telekom.de|TurnitinBot|voyager|W3.SiteSearch.Crawler|W3C-checklink|W3C_Validator|www.WISEnutbot.com|yacybot|Yahoo-MMCrawler|Yahoo\!.DE.Slurp|Yahoo\!.Slurp|YahooSeeker).* [NC]
+RewriteRule (wp-admin|wp-admin/.*)$ - [F]
+
+
+# ----------------------------------------------------------------------
+# Installation directory
+# ----------------------------------------------------------------------
+
+# Change basepath to match your installation directory
+RewriteBase /
+
+RewriteRule ^$ index.php [L]
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+
+RewriteRule ^.*$ index.php [NC,L]
