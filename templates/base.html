@@ -11,31 +11,31 @@
 <head>
     {% block head %}
         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
         <title>
             {% block title %}{% endblock %}
             {{ wp.bloginfo('name') }}
         </title>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
         <meta name="description" content="{{ wp.bloginfo('description') }}">
-        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width">
 
         <link href="{{ basepath }}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="{{ basepath }}/style.css" rel="stylesheet">
         <style type="text/css">
-            body { padding-top: 60px; padding-bottom: 40px; }
+            {% block styles %}
+                body { padding-top: 60px; padding-bottom: 40px; }
+            {% endblock %}
         </style>
-
+        
         <!--[if lt IE 9]><style>
         </style><![endif]-->
 
-        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
-        <!-- Le fav and touch icons --><!--
+        <!--
         <link rel="shortcut icon" href="{{ basepath }}/favicon.ico">
         <link rel="apple-touch-icon-precomposed" sizes="114x114"
             href="{{ basepath }}/apple-touch-icon-114-precomposed.png">
@@ -47,14 +47,13 @@
             href="{{ basepath }}/apple-touch-icon-57-precomposed.png">
         -->
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     {% endblock %}
 
     {{ wp.wp_head() }}
 
 </head>
 <body>
-
+    
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         
@@ -103,6 +102,14 @@
 <div class="container" role="main">
     <div class="row">
         <div class="span12">
+
+            <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser.
+            Please <a href="http://browsehappy.com/">upgrade your browser</a> or
+            <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a>
+            to improve your experience.</p>
+            <![endif]-->
+
             {% block content %}
             {% endblock %}
         </div>
@@ -122,6 +129,8 @@
 </div>
 </footer>
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ basepath }}/js/jquery-1.8.3.min.js"><\/script>')</script>
 <script src="{{ basepath }}/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
