@@ -13,12 +13,18 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
         <title>
-            {% block title %}{% endblock %}
-            {{ wp.bloginfo('name') }}
+            {% block title %}
+                {% if wp.wp_title('', false) != '' %}
+                    {{ wp.wp_title('', true) }} &#187;
+                {% endif %}
+                {{ wp.bloginfo('name') }}
+            {% endblock %}
         </title>
 
         <meta name="description" content="{{ wp.bloginfo('description') }}">
         <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" id="twentytwelve-fonts-css" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&amp;subset=latin,latin-ext" type="text/css" media="all">
 
         <link href="{{ basepath }}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="{{ basepath }}/style.css" rel="stylesheet">
@@ -27,8 +33,6 @@
                 body { padding-top: 60px; padding-bottom: 40px; }
             {% endblock %}
         </style>
-        
-        <link rel="stylesheet" id="twentytwelve-fonts-css" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&amp;subset=latin,latin-ext" type="text/css" media="all">
         
         <!--[if lt IE 9]><style>
         </style><![endif]-->
