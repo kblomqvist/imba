@@ -7,5 +7,5 @@
  * GPL license
  */
 
-global $twig;
-echo $twig->render('page.html', array('post' => $posts[0]));
+include 'header.php';
+echo $twig->render('page.html', array('post' => $posts[0], 'mainmenu' => $mainmenu));

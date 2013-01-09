@@ -1,10 +1,11 @@
 <?php
 /*
+ * Imba theme for WordPress
  * Copyright (c) Kim Blomqvist
  * All rights reserved.
  *
  * GPL license
  */
 
-global $twig;
-echo $twig->render('blog_posts.html', array('posts' => $posts));
+include 'header.php';
+echo $twig->render('blog_posts.html', array('posts' => $posts, 'mainmenu' => $mainmenu));

@@ -37,7 +37,6 @@ $twig->addGlobal('jquery', $jquery);
 $twig->addGlobal('basepath', get_bloginfo('stylesheet_directory'));
 
 
-
 // ---------------------------------------------------------------------
 // Menus
 // ---------------------------------------------------------------------
@@ -48,7 +47,6 @@ function register_my_menus() {
 }
 
 add_action('init', 'register_my_menus');
-
 
 
 // ---------------------------------------------------------------------

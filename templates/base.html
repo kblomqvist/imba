@@ -30,7 +30,7 @@
         <link href="{{ basepath }}/style.css" rel="stylesheet">
         <style type="text/css">
             {% block styles %}
-                body { padding-top: 60px; padding-bottom: 40px; }
+                .container-narrow { margin: 0 auto; max-width: 700px; }
             {% endblock %}
         </style>
         
@@ -60,80 +60,49 @@
 </head>
 <body>
     
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        
-    <div class="container" role="navigation">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </a>
-        
-        <a class="brand" href="#">Project name</a>
-        
-        <div class="nav-collapse collapse">
-            <ul class="nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li class="nav-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-            
-            <form class="navbar-form pull-right">
-                <input class="span2" type="text" placeholder="Email">
-                <input class="span2" type="password" placeholder="Password">
-                <button type="submit" class="btn">Sign in</button>
-            </form>
-          
-        </div>
-    </div>
-    
-    </div>
-</div>
+<div class="container-narrow">
 
-<div id="main-wrapper">
-<div class="container" role="main">
-    <div class="row">
+      <div class="masthead">
+
+        {{ mainmenu|raw }}
+
+        <h3 class="muted">Project name</h3>
+      </div>
+
+      <hr>
+
+      <div class="jumbotron">
+        <h1>Super awesome marketing speak!</h1>
+        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <a class="btn btn-large btn-success" href="#">Sign up today</a>
+      </div>
+
+      <hr>
+
+      <div class="row-fluid marketing">
         <div class="span12">
-
             <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser.
-            Please <a href="http://browsehappy.com/">upgrade your browser</a> or
-            <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a>
-            to improve your experience.</p>
+                <p class="chromeframe">You are using an <strong>outdated</strong> browser.
+                Please <a href="http://browsehappy.com/">upgrade your browser</a> or
+                <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a>
+                to improve your experience.</p>
             <![endif]-->
 
             {% block content %}
             {% endblock %}
         </div>
-    </div>
-</div>
-</div>
+      </div>
 
-<footer>
-<div class="container">
-    <div class="row">
-        <div class="span12">
-            {% block footer %}
-            {% endblock %}
-            {{ wp.wp_footer() }}
-        </div>
-    </div>
+      <hr>
+
+      <div class="footer">
+        {% block footer %}
+          <p>© Company 2012</p>
+        {% endblock %}
+        {{ wp.wp_footer() }}
+      </div>
+
 </div>
-</footer>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="{{ basepath }}/js/jquery-1.8.3.min.js"><\/script>')</script>
