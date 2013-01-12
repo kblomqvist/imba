@@ -40,13 +40,16 @@ $twig->addGlobal('basepath', get_bloginfo('stylesheet_directory'));
 // ---------------------------------------------------------------------
 // Menus
 // ---------------------------------------------------------------------
-function register_my_menus() {
+function my_register_menus() {
 	register_nav_menus(
 		array('mainmenu' => 'Päävalikko')
 	);
 }
 
-add_action('init', 'register_my_menus');
+add_action('init', 'my_register_menus');
+
+function my_get_nav_menu_items() {
+}
 
 
 // ---------------------------------------------------------------------
