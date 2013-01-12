@@ -48,7 +48,41 @@ function my_register_menus() {
 
 add_action('init', 'my_register_menus');
 
-function my_get_nav_menu_items() {
+function my_get_nav_menu_items($menu_name, $post_id) {
+	$menu_items = array();
+	$locations = get_nav_menu_locations();
+
+	if (!isset($locations[$menu_name])) {
+		return $menu_items;
+	}
+
+	$menu = wp_get_nav_menu_object($locations[$menu_name]);
+	$menu_items2 = wp_get_nav_menu_items($menu->term_id);
+
+	foreach ($menu_items2 as $menu_item) {
+		if ($menu_item->menu_item_parent == 0) {
+			$menu_items[$menu_item->ID] = array(
+				'title' => $menu_item->title,
+				'url' => $menu_item->url
+			);
+                	if ($menu_item->object_id == $post_id) {
+        	                $menu_items[$menu_item->ID]['active'] = true;
+	                }
+		} else {
+			if (array_key_exists($menu_item->menu_item_parent, $menu_items)) {
+				$menu_items[$menu_item->menu_item_parent]['childs'][$menu_item->ID] = array(
+					'title' => $menu_item->title,
+					'url' => $menu_item->url
+				);
+			}
+                	if ($menu_item->object_id == $post_id) {
+        	                $menu_items[$menu_item->menu_item_parent]['active'] = true;
+				$menu_items[$menu_item->menu_item_parent]['childs'][$menu_item->ID]['active'] = true;
+	                }
+		}
+	}
+		
+	return $menu_items;
 }
 
 
