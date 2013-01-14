@@ -118,7 +118,7 @@ ul.reset {
     -webkit-margin-end: 0px;
     -webkit-padding-start: 40px;
 }
-.soft-padding * { margin-top: 20px; margin-left: 20px; }
+.soft-padding > * { margin-top: 20px; margin-left: 20px; }
 
 
 /* ---------------------------------------------------------------
@@ -126,6 +126,11 @@ ul.reset {
  * ------------------------------------------------------------ */
 /* Moves container to left side */
 //.container { margin: 0; }
+
+ul, ol {
+   margin: 0;
+   padding-left: 40px;
+}
 
 @media (min-width: 1200px) {}
 @media (max-width: 979px) and (min-width: 768px) {}
