@@ -48,16 +48,16 @@ function my_register_menus() {
 
 add_action('init', 'my_register_menus');
 
-function my_get_nav_menu_items($menu_name, $post_id) {
+function my_get_nav_menu_items($menu, $post_id) {
 	$menu_items = array();
 	$locations = get_nav_menu_locations();
 
-	if (!isset($locations[$menu_name])) {
-		return $menu_items;
+	if (!isset($locations[$menu])) {
+		return array();
 	}
 
-	$menu = wp_get_nav_menu_object($locations[$menu_name]);
-	$menu_items2 = wp_get_nav_menu_items($menu->term_id);
+	$menu2 = wp_get_nav_menu_object($locations[$menu]);
+	$menu_items2 = wp_get_nav_menu_items($menu2->term_id);
 
 	foreach ($menu_items2 as $menu_item) {
 		if ($menu_item->menu_item_parent == 0) {
@@ -81,7 +81,7 @@ function my_get_nav_menu_items($menu_name, $post_id) {
 	                }
 		}
 	}
-		
+
 	return $menu_items;
 }
 

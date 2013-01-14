@@ -10,9 +10,6 @@ License: GPL license
 html {}
 body { font-family: "Open Sans", Helvetica, Arial, sans-serif; }
 
-body > header {}
-body > footer {}
-
 a, a:hover {}
 
 h1.entry-title > a {}
@@ -52,18 +49,65 @@ img.alignright { float: right; }
     background: none;
 }
 
-.carousel .item img { margin: 0; }
 
 /* ---------------------------------------------------------------
- * MENUS
+ * Carousel
  * ------------------------------------------------------------ */
-#main-menu { text-align: right; margin-right: 20px; }
-#main-menu > li {}
-#main-menu a { color: #fff; letter-spacing: 3px; display: block; }
-#main-menu a:hover { text-decoration: none; letter-spacing: 1px }
+.carousel { margin-bottom: 0 }
+.carousel .item img { margin: 0; }
+.carousel-caption {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 15px;
+    background: #333;
+    background: rgba(0, 0, 0, 0.75);
+}
+
 
 /* ---------------------------------------------------------------
- * HELPERS
+ * Simple navigation
+ * ------------------------------------------------------------ */
+ul.nav-simple {
+    margin-top: 10px;
+}
+ul.nav-simple a {
+    display: block;
+    padding: 2px 10px;
+    text-decoration: none;
+}
+ul.nav-simple a:hover {
+    text-decoration: none;
+    background-color: inherit;
+}
+ul.nav-simple li {
+    float: left;
+    list-style-type: none;
+}
+ul.nav-simple > li.active {
+    border-bottom: 2px solid #ccc;
+}
+ul.nav-simple > li.active:hover {
+    border-bottom: 0;
+}
+li.simple-dropdown > ul {
+    display: none;
+    z-index: 100;
+    margin: 0;
+    padding: 0;
+}
+li.simple-dropdown > ul li {
+    clear: both;
+}
+li.simple-dropdown:hover > ul {
+    display: block;
+    position: absolute;
+}
+
+
+/* ---------------------------------------------------------------
+ * Helper classes
  * ------------------------------------------------------------ */
 ul.reset {
     display: block;
@@ -74,9 +118,11 @@ ul.reset {
     -webkit-margin-end: 0px;
     -webkit-padding-start: 40px;
 }
+.soft-padding * { margin-top: 20px; margin-left: 20px; }
+
 
 /* ---------------------------------------------------------------
- * OVERRIDE BOOTSTRAP
+ * Override Twitter Bootstrap styles
  * ------------------------------------------------------------ */
 /* Moves container to left side */
 //.container { margin: 0; }

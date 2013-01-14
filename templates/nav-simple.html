@@ -1,0 +1,18 @@
+<ul class="nav nav-simple pull-right">
+    {% for link in mainmenu %}
+        {% if link.childs %}
+            <li class="simple-dropdown {% if link.active %}active{% endif %}">
+                <a href="{{ link.url }}">{{ link.title }}</a>
+                <ul>
+                    {% for child_link in link.childs %}
+                        <li><a href="{{ child_link.url }}">{{ child_link.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% else %}
+            <li class="{% if link.active %}active{% endif %}">
+	        <a href="{{ link.url }}">{{ link.title }}</a>
+            </li>
+        {% endif %}
+{% endfor %}
+</ul>
