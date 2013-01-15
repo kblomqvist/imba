@@ -31,8 +31,11 @@ $twig->addFilter(new Twig_SimpleFilter('markdown', function($string) {
 	return Markdown($string);
 }));
 
-$jquery = '';
-$twig->addGlobal('jquery', $jquery);
+class Container {
+    public $jquery = '';
+}
+$container = new Container();
+$twig->addGlobal('container', $container);
 
 $twig->addGlobal('basepath', get_bloginfo('stylesheet_directory'));
 
@@ -97,29 +100,20 @@ add_filter('pre_site_transient_update_core', function () { return null; });
 // ---------------------------------------------------------------------
 // Shortcodes
 // ---------------------------------------------------------------------
-function replace($attrs, $content) {
-	global $jquery;
-	extract(shortcode_atts(array('id' => ''), $attrs));
-	$content = str_replace("\r\n", '', $content);
-	$jquery .= "\$('#$id').html('$content');\n";
-}
-function append($attrs, $content) {
-	global $jquery;
-	extract(shortcode_atts(array('id' => ''), $attrs));
-	$content = str_replace("\r\n", '', $content);
-	$jquery .= "\$('#$id').append('$content');\n";
-}
-function prepend($attrs, $content) {
-	global $jquery;
-	extract(shortcode_atts(array('id' => ''), $attrs));
-	$content = str_replace("\r\n", '', $content);
-	$jquery .= "\$('#$id').prepend('$content');\n";
+function placeholder($attrs, $content) {
+        global $container;
+        extract(shortcode_atts(array('id' => '', 'place' => 'inner'), $attrs));
+        $content = str_replace("\r\n", '', $content);
+        if ($place == 'append') {
+                $container->jquery .= "\$('#$id').append('$content');\n";
+        } elseif ($place == 'prepend') {
+                $container->jquery .= "\$('#$id').prepend('$content');\n";
+        } else {
+                $container->jquery .= "\$('#$id').html('$content');\n";
+        }
 }
 
-add_shortcode('replace', 'replace');
-add_shortcode('append', 'append');
-add_shortcode('prepend', 'prepend');
-
+add_shortcode('placeholder', 'placeholder');
 
 
 // ---------------------------------------------------------------------

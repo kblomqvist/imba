@@ -109,16 +109,15 @@
 <script src="{{ basepath }}/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $(".img-swap").hover(
-            function() { this.src = this.src.replace("_nm","_hv"); },
-            function() { this.src = this.src.replace("_hv","_nm"); }
-        );
-
-	{{ jquery|raw }}
+        {{ container.jquery|raw }}
 
         {% block jquery %}
         {% endblock %}
 
+        $(".img-swap").hover(
+            function() { this.src = this.src.replace("_nm","_hv"); },
+            function() { this.src = this.src.replace("_hv","_nm"); }
+        );
     });
 </script>
 
