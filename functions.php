@@ -100,7 +100,7 @@ add_filter('pre_site_transient_update_core', function () { return null; });
 // ---------------------------------------------------------------------
 // Shortcodes
 // ---------------------------------------------------------------------
-function placeholder($attrs, $content) {
+function my_placeholder($attrs, $content) {
         global $container;
         extract(shortcode_atts(array('id' => '', 'place' => 'inner'), $attrs));
         $content = str_replace("\r\n", '', $content);
@@ -113,7 +113,13 @@ function placeholder($attrs, $content) {
         }
 }
 
-add_shortcode('placeholder', 'placeholder');
+function my_link($attrs, $content) {
+        extract(shortcode_atts(array('to' => '', 'title' => ''), $attrs));
+        return '<a href=' . get_option('siteurl') . "/\"$to\" title=\"$title\">$content</a>";
+}
+
+add_shortcode('placeholder', 'my_placeholder');
+add_shortcode('link', 'my_link');
 
 
 // ---------------------------------------------------------------------
