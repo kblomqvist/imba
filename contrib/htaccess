@@ -76,11 +76,12 @@ RewriteRule (wp-admin|wp-admin/.*)$ - [F]
 # ----------------------------------------------------------------------
 
 # Change basepath to match your installation directory
+RewriteEngine On
+
 RewriteBase /
-
 RewriteRule ^$ index.php [L]
-RewriteRule ^index\.php$ - [L]
+RewriteRule ^index\.php / [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule . index.php [NC,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [L]
